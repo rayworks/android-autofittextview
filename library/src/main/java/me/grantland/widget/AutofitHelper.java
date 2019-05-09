@@ -501,17 +501,19 @@ public class AutofitHelper {
 
         textSize = mTextView.getTextSize();
         if (textSize != oldTextSize) {
-            sendTextSizeChange(textSize, oldTextSize);
+            sendTextSizeChange(true, textSize, oldTextSize);
+        } else {
+            sendTextSizeChange(false, textSize, oldTextSize);
         }
     }
 
-    private void sendTextSizeChange(float textSize, float oldTextSize) {
+    private void sendTextSizeChange(boolean textSizeChanged, float textSize, float oldTextSize) {
         if (mListeners == null) {
             return;
         }
 
         for (OnTextSizeChangeListener listener : mListeners) {
-            listener.onTextSizeChange(textSize, oldTextSize);
+            listener.onTextSizeChange(textSizeChanged, textSize, oldTextSize);
         }
     }
 
@@ -546,9 +548,9 @@ public class AutofitHelper {
      */
     public interface OnTextSizeChangeListener {
         /**
-         * This method is called to notify you that the size of the text has changed to
+         * This method is called to notify you that whether the size of the text has changed to
          * {@code textSize} from {@code oldTextSize}.
          */
-        public void onTextSizeChange(float textSize, float oldTextSize);
+        public void onTextSizeChange(boolean sizeChanged, float textSize, float oldTextSize);
     }
 }

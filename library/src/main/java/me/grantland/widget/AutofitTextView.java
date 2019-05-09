@@ -186,7 +186,7 @@ public class AutofitTextView extends TextView implements AutofitHelper.OnTextSiz
     }
 
     @Override
-    public void onTextSizeChange(float textSize, float oldTextSize) {
+    public void onTextSizeChange(boolean sizeChanged, float textSize, float oldTextSize) {
         // do nothing
     }
 }
